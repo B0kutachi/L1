@@ -1,0 +1,118 @@
+#include "stdafx.h"
+#include <iostream>
+#include <array>
+#include <string>
+
+using namespace std;
+
+void Output_array(int arr[], int size)
+{
+	for (int i = 0; i < size; i++)
+		cout << arr[i] << " ";
+	cout << endl;
+}
+
+void Bubblesort(int arr[], int size)
+{
+	for (int i = 0; i < size-1; i++)
+		for (int j = 0; j < size-1; j++)
+			if (arr[j] > arr[j + 1])
+			{
+				int buf = arr[j];
+				arr[j] = arr[j + 1];
+				arr[j + 1] = buf;
+			}
+}
+
+void Breakpoints1()
+{
+	double add = 1.0;
+	double sum = 0.0;
+	for (int i = 0; i < 10; i++)
+	{
+		sum += add * i;
+		add *= 1.1;
+	}
+	cout << "Total sum is " << sum << endl;
+}
+
+void Breakpoints2()
+{
+	double add = 1.0;
+	double sum = 0.0;
+	for (int i = 0; i < 1000; i++)
+	{
+		sum += add * i; // Поставьте условную точку останова здесь
+		if (i % 3 == 0)
+		{
+			add *= 1.1;
+		}
+		else
+		{
+			add /= 3.0;
+		}
+	}
+	cout << "Total sum is " << sum << endl;
+}
+
+void Breakpoints3()
+{
+	int Array[10];
+	cout << "Enter array: ";
+	for (int i = 0; i < 10; i++)
+		cin >> Array[i];
+	cout << "Your array is: ";
+	Output_array(Array, 10);
+	cout << "Sorted array is: ";
+	Bubblesort(Array, 10); 	Output_array(Array, 10);
+}
+
+void Breakpoints4()
+{
+
+}
+
+void Breakpoints5()
+{
+	int i = 0;
+	const int s = 8;
+	char Array[s];
+	cout << "Enter your array: ";
+	for (i = 0; i < s; i++)
+		cin >> Array[i];
+	cout << "Your array is: ";
+	for (int i = 0; i < s; i++)
+		cout << Array[i] << " ";
+	cout << endl << "All letters in your array: ";
+	for (i = 0; i < s; i++)
+	if ((Array[i] >= 'a' && Array[i] <= 'z') || (Array[i] >= 'A' && Array[i] <= 'Z'))
+		cout << Array[i];
+}
+
+int main()
+{
+	int x;
+	cout << "Enter your case: ";
+	cin >> x;
+	switch (x)
+	{
+	case 1:
+		Breakpoints1();
+		break;
+	case 2:
+		Breakpoints2();
+		break;
+	case 3:
+		Breakpoints3();
+		break;
+	case 4:
+		Breakpoints4();
+		break;
+	case 5:
+		Breakpoints5();
+		break;
+	default:
+		cout << "Error";
+	}
+	cout << endl << endl;
+}
