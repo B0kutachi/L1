@@ -40,6 +40,16 @@ void DemoGetPower(double base, int exponent)
 	cout << base << " ^ " << exponent << " = " << GetPower(base, exponent);
 }
 
+void RoundToTens(int& value)
+{
+	int notvalue = value % 10, startvalue = value;
+	if (notvalue < 5)
+		value = (value / 10) * 10;
+	else
+		value = (value / 10) * 10 + 10;
+	cout << "For " << startvalue << " rounded value is " << value << endl;
+}
+
 
 void Breakpoints1()
 {
@@ -117,6 +127,27 @@ void Breakpoints6()
 
 void Breakpoints7()
 {
+	int s = 14, m = 191, f = 27;
+	RoundToTens(s); RoundToTens(m); RoundToTens(f);
+}
+
+void Breakpoints8()
+{
+
+	int a = 5;
+	int b = 4;
+	cout << "Address of a: " << &a << endl;
+	cout << "Address of b: " << &b << endl;
+
+	double c = 13.5;
+	cout << "Address of c: " << &c << endl;
+
+	bool d = true;
+	cout << "Address of d: " << &d << endl;
+}
+
+void Breakpoints9()
+{
 
 }
 
@@ -148,6 +179,12 @@ int main()
 		break;
 	case 7:
 		Breakpoints7(); // Task #1.1.3.3 is function - "DemoGetPower"  // Task #1.1.3.4
+		break;
+	case 8:
+		Breakpoints8(); // Task 1.1.4.1
+		break;
+	case 9:
+		Breakpoints9(); // Task 1.1.4.2
 		break;
 	default:
 		cout << "Error";
