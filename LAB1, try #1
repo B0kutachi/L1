@@ -67,6 +67,16 @@ void Foo2(double& a)
 	cout << "New value of a in Foo2(): " << a << endl;
 }
 
+void Foo3(double* a)
+{
+	cout << "Address in pointer: " << a << endl;
+	cout << "Address of pointer: " << &a << endl;
+	cout << "Value in pointer address: " << *a << endl;
+
+	*a = 15.0;
+	cout << "New value in pointer address: " << *a << endl;
+}
+
 
 void Breakpoints1()
 {
@@ -222,6 +232,58 @@ void Breakpoints12()
 
 void Breakpoints13()
 {
+	int a = 5;
+	int* pointer = &a;
+
+	cout << "Address of a: " << &a << endl;
+	cout << "Address in pointer: " << pointer << endl;
+	cout << "Address of pointer: " << &pointer << endl;
+
+	cout << endl;
+	*pointer = 7;
+	cout << "Value in a: " << a << endl;
+	cout << "Value by pointer address: " << *pointer << endl;
+}
+
+void Breakpoints14()
+{
+	double value = 5.0;
+	double* pointer = &value;
+	cout << "Address of value in main(): " << &value << endl;
+	cout << "Address in pointer in main(): " << pointer << endl;
+	cout << "Address of pointer in main(): " << &pointer << endl;
+	cout << "Value of a in main(): " << value << endl;
+	cout << endl;
+
+	Foo3(pointer);
+
+	cout << endl;
+	cout << "Value of a in main(): " << value << endl;
+}
+
+void Breakpoints15()
+{
+	double *Array = new double[8];
+	Array = new double[8] { 1.0, 15.0, 8.2, -3.5, 12.6, 38.4, -0.5, 4.5 };
+	int size = sizeof(double);
+	cout << "Array of double: " << endl;
+	for (int i = 0; i < size; i++)
+		cout << Array[i] << " ";
+	delete []Array;
+}
+
+void Breakpoints16()
+{
+	bool *Array = new bool[8];
+	Array = new bool[8] { 1, 0, 1, 1, 0, 1, 0, 0 };
+	cout << "Array of bool: " << endl;
+	for (int i = 0; i < 8; i++)
+		cout << boolalpha << Array[i] << " ";
+	delete []Array;
+}
+
+void Breakpoints17()
+{
 
 }
 
@@ -271,6 +333,18 @@ int main()
 		break;
 	case 13:
 		Breakpoints13(); // Task 1.1.4.6
+		break;
+	case 14:             // Task 1.1.4.7 - при объявлении указателя "*" стоит после типа данных;
+		Breakpoints14(); // при разыменовании "*" стоит перед именем указателя;     // Task 1.1.4.8
+		break;           // при умножении слева и справа от "*" будут находиться имена;
+	case 15:
+		Breakpoints15(); // Task 1.1.5.1
+		break;
+	case 16:
+		Breakpoints16(); // Task 1.1.5.2
+		break;
+	case 17:
+		Breakpoints17(); // Task 1.1.5.3
 		break;
 	default:
 		cout << "Error";
