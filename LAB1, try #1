@@ -4,6 +4,8 @@
 #include <string>
 #include <algorithm>
 #include <math.h>
+#include <cstdlib>
+#include <ctime>
 
 using namespace std;
 
@@ -89,6 +91,19 @@ void Foo3(double* a)
 	cout << "New value in pointer address: " << *a << endl;
 }
 
+int* MakeRandomArray(int arraySize) {
+	int* array = new int[arraySize];
+	srand(time(0));
+	for (int i = 0; i < arraySize; i++) {
+		array[i] = rand() % 101;
+	}
+	Output_array(array, arraySize);
+	delete[] array;
+	array = nullptr;
+
+	return array;
+}
+
 
 void Breakpoints1()
 {
@@ -133,13 +148,13 @@ void Breakpoints3()
 
 void Breakpoints4()
 {
-	double Array[13] {99.1, 38.3, 91.4, -14,7, 7.2, 352.2, -98.9, 60.7, 167.4, 120.9, 211.1, 17.1};
+	double Array[12] {99.1, 38.3, 91.4, -14.7, 7.2, 352.2, -98.9, 60.7, 167.4, 120.9, 211.1, 17.1};
 	cout << "\nYour source array is: \n";
-	for (int i = 0; i < 13; i++)
+	for (int i = 0; i < 12; i++)
 		cout << Array[i] << " ";
 	cout << "\n\nEnter searching value: ";
 	int searchingValue, elements = 0; cin >> searchingValue;
-	for (int i = 0; i < 13; i++)
+	for (int i = 0; i < 12; i++)
 	if (Array[i] >= searchingValue)
 		elements += 1;
 	cout << "\nElements of array more than " << searchingValue << " is: " << elements;
@@ -360,6 +375,74 @@ void Breakpoints18()
 
 void Breakpoints19()
 {
+	int* Array = new int[10];
+	Array[0] = { 1 };
+	Array[1] = { 15 };
+	Array[2] = { -8 };
+	Array[3] = { -3 };
+	Array[4] = { 12 };
+	Array[5] = { 38 };
+	Array[6] = { 0 };
+	Array[7] = { 4 };
+	Array[8] = { 16 };
+	Array[9] = { 7 };
+	cout << "Int array: " << endl;
+	for (int i = 0; i < 10; i++)
+		cout << Array[i] << " ";
+	int searchingValue;
+	cout << "\n\nEnter searching value: ";
+	cin >> searchingValue;
+	for (int i = 0; i < 10; i++) {
+		if (Array[i] == searchingValue)
+			cout << "\nIndex of searching value " << searchingValue << " is: " << i;
+}
+	delete[] Array;
+	Array = nullptr;
+}
+
+void Breakpoints20()
+{
+	char* Array = new char[15];
+	Array[0] = 'a';
+	Array[1] = '2';
+	Array[2] = '@';
+	Array[3] = '$';
+	Array[4] = '3';
+	Array[5] = 'G';
+	Array[6] = 'Q';
+	Array[7] = 'W';
+	Array[8] = '8';
+	Array[9] = '9';
+	Array[10] = '!';
+	Array[11] = '+';
+	Array[12] = 'i';
+	Array[13] = 'n';
+	Array[14] = 'e';
+
+	cout << "Your array is: \n";
+	for (int i = 0; i < 15; i++)
+		cout << Array[i] << " ";
+	cout << endl << "\nAll letters in your array: \n";
+	for (int i = 0; i < 15; i++)
+		if ((Array[i] >= 'a' && Array[i] <= 'z') || (Array[i] >= 'A' && Array[i] <= 'Z'))
+			cout << Array[i];
+
+	int count = 0;
+	for (int i = 0; i < 15; i++) {
+		if (Array[i] >= 'a' && Array[i] <= 'z')
+			count++;
+	}
+	cout << "\n\nCount letters is: " << count << endl;
+
+	delete[] Array;
+	Array = nullptr;
+}
+
+void Breakpoints21()
+{
+	int* array1 = MakeRandomArray(5);
+	int* array2 = MakeRandomArray(8);
+	int* array3 = MakeRandomArray(13);
 
 }
 
@@ -427,6 +510,12 @@ int main()
 		break;
 	case 19:
 		Breakpoints19(); // Task 1.1.5.5
+		break;
+	case 20:
+		Breakpoints20(); // Task 1.1.5.6
+		break;
+	case 21:
+		Breakpoints21(); // Task 1.1.5.7
 		break;
 	default:
 		cout << "Error";
