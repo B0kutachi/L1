@@ -92,16 +92,16 @@ void Foo3(double* a)
 }
 
 int* MakeRandomArray(int arraySize) {
-	int* array = new int[arraySize];
-	srand(time(0));
-	for (int i = 0; i < arraySize; i++) {
-		array[i] = rand() % 101;
-	}
-	Output_array(array, arraySize);
-	delete[] array;
-	array = nullptr;
+	int* Array = new int[arraySize];
+	for (int i = 0; i < arraySize; i++)
+		Array[i] = rand() % 101;
+	cout << "\nRandom array of " << arraySize << ":\n";
+	Output_array(Array, arraySize);
 
-	return array;
+	delete[] Array;
+	Array = nullptr;
+
+	return Array;
 }
 
 
@@ -440,9 +440,14 @@ void Breakpoints20()
 
 void Breakpoints21()
 {
-	int* array1 = MakeRandomArray(5);
-	int* array2 = MakeRandomArray(8);
-	int* array3 = MakeRandomArray(13);
+	srand(time(0));
+	int* Array1 = MakeRandomArray(5);
+	int* Array2 = MakeRandomArray(8);
+	int* Array3 = MakeRandomArray(13);
+}
+
+void Breakpoints22()
+{
 
 }
 
@@ -516,6 +521,9 @@ int main()
 		break;
 	case 21:
 		Breakpoints21(); // Task 1.1.5.7
+		break;
+	case 22:
+		Breakpoints22(); // Task 1.1.5.8
 		break;
 	default:
 		cout << "Error";
