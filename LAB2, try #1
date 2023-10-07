@@ -1,4 +1,69 @@
 #include "stdafx.h"
 #include <iostream>
+#include <exception>
 
 using namespace std;
+
+
+void Sort(double* values, int count)
+{
+	double swap;
+
+	if (count <= 0)
+	{
+		throw exception();
+	}
+
+	else
+		for (int i = 0; i < count; i++)
+		{
+			for (int j = 0; j < count; j++)
+			{
+				if (values[i] < values[j])
+				{
+					swap = values[i];
+					values[i] = values[j];
+					values[j] = swap;
+				}
+			}
+		}
+}
+
+void DemoSort()
+{
+	try
+	{
+		int count = -5;
+		double* values = new double[count] {100.0, 249.0, 12.0, 45.0, 23.5};
+		Sort(values, count);
+		for (int i = 0; i < count; i++)
+			cout << values[i] << " ";
+		delete[] values; values = nullptr;
+	}
+
+	catch(exception)
+	{
+		cout << "\nException catched!";
+	}
+
+
+}
+
+
+int main()
+{
+	int x = 0;
+	cout << "Enter case: ";
+	cin >> x;
+	switch (x)
+	{
+	case 1:
+		DemoSort();
+		break;
+	default:
+		cout << "Invalid number of case.";
+	}
+	cout << endl << endl;
+	return 0;
+}
+
