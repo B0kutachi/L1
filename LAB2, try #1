@@ -1,9 +1,9 @@
 #include "stdafx.h"
 #include <iostream>
 #include <exception>
+#include <string>
 
 using namespace std;
-
 
 void Sort(double* values, int count)
 {
@@ -15,39 +15,97 @@ void Sort(double* values, int count)
 	}
 
 	else
-		for (int i = 0; i < count; i++)
+	for (int i = 0; i < count; i++)
+	{
+		for (int j = 0; j < count; j++)
 		{
-			for (int j = 0; j < count; j++)
+			if (values[i] < values[j])
 			{
-				if (values[i] < values[j])
-				{
-					swap = values[i];
-					values[i] = values[j];
-					values[j] = swap;
-				}
+				swap = values[i];
+				values[i] = values[j];
+				values[j] = swap;
 			}
 		}
+	}
 }
 
 void DemoSort()
 {
 	try
 	{
-		int count = -5;
-		double* values = new double[count] {100.0, 249.0, 12.0, 45.0, 23.5};
+		int count = 5;
+		double* values = new double[count] { 100.0, 249.0, 12.0, 45.0, 23.5 };
+		cout << "\nValues in array: " << count << endl;
 		Sort(values, count);
+		cout << "Sorted array:" << endl;
 		for (int i = 0; i < count; i++)
 			cout << values[i] << " ";
 		delete[] values; values = nullptr;
 	}
-
-	catch(exception)
+	catch (const exception& ex)
 	{
 		cout << "\nException catched!";
 	}
 
-
+	try
+	{
+		int count = 0;
+		double* values = new double[count] {  };
+		cout << "\n\n\nValues in array: " << count << endl;
+		Sort(values, count);
+		cout << "Sorted array: " << endl;
+		for (int i = 0; i < count; i++)
+			cout << values[i] << " ";
+		delete[] values; values = nullptr;
+	}
+	catch (const exception& ex)
+	{
+		cout << "Exception catched! " << "Invalid count." << endl;
+	}
 }
+
+struct Rectangle {
+	double Length;
+	double Width;
+	string Color;
+};
+
+struct Flight {
+	string DeparturePoint;
+	string Destination;
+	int FlightTimeInMinutes;
+};
+
+struct Movie {
+	string Title;
+	int DurationInMinutes;
+	int TheYearOfRelease;
+	double Rating;
+};
+
+struct Time {
+	int clocks;
+	int minutes;
+	int seconds;
+};
+
+struct Contact {
+	string Name;
+	int PhoneNumber;
+	string Email;
+};
+
+struct Song {
+	string Title;
+	string Creator;
+	int DurationInSeconds;
+};
+
+struct Discipline {
+	string Name;
+	string MinimumCourse;
+	int NumberOfHours;
+};
 
 
 int main()
@@ -57,13 +115,15 @@ int main()
 	cin >> x;
 	switch (x)
 	{
-	case 1:
-		DemoSort();
-		break;
+	case 1:                  // Task 2.2.1.1 - 2.2.1.2
+		DemoSort();      // в версии VS 2013-го года отладчик выдаёт ошибку заранее при вводе
+		break;           // отриц. значения, поэтому во 2-м вызове указан массив размером 0, вместо -1
+	case 2:
+		                 // Task 2.2.2.1: структуры Rectangle, Flight, Movie, Time
+		break;           // Task 2.2.2.2: структуры Contact, Song, Discipline
 	default:
 		cout << "Invalid number of case.";
 	}
 	cout << endl << endl;
 	return 0;
 }
-
