@@ -276,6 +276,35 @@ void WrongPointers()
 	Movie* ptr1_mv = &movie;
 }
 
+void WriteRectangle(Rectangle& rectangle)
+{
+	cout << "\nRectangle has a size: " << rectangle.Length << "x" << rectangle.Width <<
+		" and " << rectangle.Color << " color";
+}
+
+void ReadRectangle(Rectangle& rectangle)
+{
+	cout << "\nEnter length: ";
+	cin >> rectangle.Length;
+	cout << "Enter width: ";
+	cin >> rectangle.Width;
+	cout << "Enter color: ";
+	cin >> rectangle.Color;
+}
+
+void DemoReadAndWriteRectangles()
+{
+	const int RECTANGLES = 5;
+	Rectangle rectangles[RECTANGLES];
+
+	for (int i = 0; i < RECTANGLES; ++i)
+		ReadRectangle(rectangles[i]);
+
+	for (int i = 0; i < RECTANGLES; ++i)
+		WriteRectangle(rectangles[i]);
+}
+
+
 int main()
 {
 	int x = 0;
@@ -283,7 +312,7 @@ int main()
 	cin >> x;
 	switch (x)
 	{
-	case 1:                  // Task 2.2.1.1 - 2.2.1.2
+	case 1:              // Task 2.2.1.1 - 2.2.1.2
 		DemoSort();      // в версии VS 2013-го года отладчик выдаёт ошибку заранее при вводе
 		break;           // отриц. значения, поэтому во 2-м вызове указан массив размером 0, вместо -1
 	case 2:
@@ -301,10 +330,13 @@ int main()
 		someMovies();
 		someTimes();
 		break;
-	case 5:                  // Task 2.2.4.1, 2.2.4.2, 2.2.4.3 - использование указателей в структурах
+	case 5:              // Task 2.2.4.1, 2.2.4.2, 2.2.4.3 - использование указателей в структурах
 		WrongPointers(); // Task 2.2.4.4
 		break;
 	case 6:
+		DemoReadAndWriteRectangles(); // Task 2.2.5.1 - ф-я WriteRectangle // Task 2.2.5.2 - ф-я ReadRectangle
+		break;                        // Task 2.2.5.3
+	case 7:
 
 		break;
 	default:
