@@ -111,54 +111,75 @@ struct Discipline {
 void DemoRectangle()
 {
 	Rectangle rectangle1{ 20, 15, "blue" };
+	Rectangle* ptr1_rect1 = &rectangle1;
+	Rectangle* ptr2_rect1 = &rectangle1;
 	cout << "\nEnter length of rectangle: ";
-	cin >> rectangle1.Length;
+	cin >> ptr1_rect1->Length;
 	cout << "Enter width of rectangle: ";
-	cin >> rectangle1.Width;
+	cin >> ptr1_rect1->Width;
 	cout << "Enter color of rectangle: ";
-	cin >> rectangle1.Color;
-	cout << "A rectangle has a: " << "size " << rectangle1.Length << "x" << rectangle1.Width << 
-		" and " << rectangle1.Color << " color." << endl;
+	cin >> ptr1_rect1->Color;
+	cout << "A rectangle has a: " << "size " << ptr1_rect1->Length << "x" << ptr1_rect1->Width << 
+		" and " << ptr1_rect1->Color << " color." << endl;
+	cout << "\nAddress of ptr1: " << ptr1_rect1;
+	cout << "\nAddress of ptr2: " << ptr2_rect1 << endl;
 }
 
 void DemoFlight()
 {
 	Flight flight1{ "Moscow", "Tomsk", 270 };
+	Flight* ptr1_fl1 = &flight1;
+	Flight* ptr2_fl1 = &flight1;
 	cout << "\nEnter point of departure: ";
-	cin >> flight1.DeparturePoint;
+	cin >> ptr1_fl1->DeparturePoint;
 	cout << "Enter point of destination: ";
-	cin >> flight1.Destination;
+	cin >> ptr1_fl1->Destination;
 	cout << "Enter flight time in minutes: ";
-	cin >> flight1.FlightTimeInMinutes;
-
-	cout << "\nFlight: " << "from " << flight1.DeparturePoint << " to " << flight1.Destination << " takes " 
-		<< flight1.FlightTimeInMinutes << " minutes." << endl;
+	cin >> ptr1_fl1->FlightTimeInMinutes;
+	cout << "\nFlight: " << "from " << ptr1_fl1->DeparturePoint << " to " << ptr1_fl1->Destination << " takes " 
+		<< ptr1_fl1->FlightTimeInMinutes << " minutes." << endl;
+	cout << "\nAddress of ptr1: " << ptr1_fl1;
+	cout << "\nAddress of ptr2: " << ptr2_fl1 << endl;
 }
 
 void DemoMovie()
 {
-	Movie movie1{ "King Arthur's sword", 126, 2017, "fantasy, action, drama, adventure", 7.2};
+	Movie movie1{ "King Arthur's sword", 126, 2017, "fantasy, action, drama, adventure", 7.2 };
+	Movie* ptr1_mv1 = &movie1;
+	Movie* ptr2_mv1 = &movie1;
 	cout << "\nEnter title of movie: ";
 	cin.ignore(32767, '\n');
-	getline(cin, movie1.Title);
+	getline(cin, ptr1_mv1->Title);
 	cout << "Enter duration of movie(in minutes): ";
-	cin >> movie1.DurationInMinutes;
+	cin >> ptr1_mv1->DurationInMinutes;
 	cout << "Enter release year date: ";
-	cin >> movie1.TheYearOfRelease;
+	cin >> ptr1_mv1->TheYearOfRelease;
 	cout << "Enter genres of movie: ";
 	cin.ignore(32767, '\n');
-	getline(cin, movie1.Genre);
+	getline(cin, ptr1_mv1->Genre);
 	cout << "Enter rating of movie: ";
-	cin >> movie1.Rating;
-	cout << "\nMovie: " << movie1.Title << endl << "Duration: " << movie1.DurationInMinutes << endl 
-		<< "Release year date: " << movie1.TheYearOfRelease << endl << "Genres: " <<
-			movie1.Genre << endl << "Rating: " << movie1.Rating << endl;
+	cin >> ptr1_mv1->Rating;
+	cout << "\nMovie: " << ptr1_mv1->Title << endl << "Duration: " << ptr1_mv1->DurationInMinutes << endl 
+		<< "Release year date: " << ptr1_mv1->TheYearOfRelease << endl << "Genres: " <<
+			ptr1_mv1->Genre << endl << "Rating: " << ptr1_mv1->Rating << endl;
+	cout << "\nAddress of ptr1: " << ptr1_mv1;
+	cout << "\nAddress of ptr2: " << ptr2_mv1 << endl;
 }
 
 void DemoTime()
 {
 	Time time1{ 18, 30, 49 };
-	//cout << "Time: " << time1.clocks << ":" << time1.minutes << ":" << time1.seconds << endl;
+	Time* ptr1_time1 = &time1;
+	Time* ptr2_time1 = &time1;
+	cout << "\nEnter an hour: ";
+	cin >> ptr1_time1->clocks;
+	cout << "Enter minutes: ";
+	cin >> ptr1_time1->minutes;
+	cout << "Enter seconds: ";
+	cin >> ptr1_time1->seconds;
+	cout << "Time is: " << ptr1_time1->clocks << ":" << ptr1_time1->minutes << ":" << ptr1_time1->seconds << endl;
+	cout << "\nAddress of ptr1: " << ptr1_time1;
+	cout << "\nAddress of ptr2: " << ptr2_time1 << endl;
 }
 
 void chooseStruct()
@@ -178,7 +199,82 @@ void chooseStruct()
 		cout << "Invalid number." << endl;
 }
 
+void showRectangles(struct Rectangle nameRectangle, int number)
+{
+	cout << "A rectangle #" << number << " has a: " << "size " << nameRectangle.Length << "x" << nameRectangle.Width <<
+		" and " << nameRectangle.Color << " color." << endl;
+}
 
+void showFlights(struct Flight nameFlight, int number)
+{
+	cout << "Flight #" << number << ": from " << nameFlight.DeparturePoint << " to " << nameFlight.Destination << " takes "
+		<< nameFlight.FlightTimeInMinutes << " minutes." << endl;
+}
+
+void showMovies(struct Movie nameMovie, int number)
+{
+	cout << "Movie #" << number << ": " << nameMovie.Title << " Duration: " << nameMovie.DurationInMinutes
+		<< ". Release year date: " << nameMovie.TheYearOfRelease << ". Genres: " <<
+		nameMovie.Genre << ". Rating: " << nameMovie.Rating << endl;
+}
+
+void showTimes(struct Time time, int number)
+{
+	cout << "Time #" << number << " is: " << time.clocks << ":" << time.minutes << ":" << time.seconds << endl;
+}
+
+
+void someRectangles()
+{
+	Rectangle rectangle1{ 20, 15, "blue" };
+	cout << endl;
+	showRectangles(rectangle1, 1);
+	Rectangle rectangle2{ 30, 20, "red" };
+	showRectangles(rectangle2, 2);
+	Rectangle rectangle3{ 40, 40, "green" };
+	showRectangles(rectangle3, 3);
+}
+
+void someFlights()
+{
+	Flight flight1{ "Moscow", "Tomsk", 270 };
+	cout << endl;
+	showFlights(flight1, 1);
+	Flight flight2{ "Novosibirsk", "Omsk", 88 };
+	showFlights(flight2, 2);
+	Flight flight3{ "St. Petersburg", "Tyumen", 193 };
+	showFlights(flight3, 3);
+}
+
+void someMovies()
+{
+	Movie movie1{ "King Arthur's sword.", 126, 2017, "fantasy, action, drama, adventure", 7.2 };
+	cout << endl;
+	showMovies(movie1, 1);
+	Movie movie2{ "Two, three, demon, come!", 95, 2022, "horrors", 6.6 };
+	showMovies(movie2, 2);
+	Movie movie3{ "Harry Potter and the Prisoner of Azkaban.", 142, 2004, "fantasy, adventure", 8.2};
+	showMovies(movie3, 3);
+}
+
+void someTimes()
+{
+	Time time1{ 14, 50, 47 };
+	cout << endl;
+	showTimes(time1, 1);
+	Time time2{ 18, 30, 10 };
+	showTimes(time2, 2);
+	Time time3{ 8, 29, 25 };
+	showTimes(time3, 3);
+}
+
+void WrongPointers()
+{
+	Flight flight{ "Nsk", "Tomsk", 12 };
+	Movie movie{ "King Arthur's sword.", 126, 2017, "fantasy, action, drama, adventure", 7.2 };
+	Flight* ptr1_fl = &flight;
+	Movie* ptr1_mv = &movie;
+}
 
 int main()
 {
@@ -187,7 +283,7 @@ int main()
 	cin >> x;
 	switch (x)
 	{
-	case 1:              // Task 2.2.1.1 - 2.2.1.2
+	case 1:                  // Task 2.2.1.1 - 2.2.1.2
 		DemoSort();      // в версии VS 2013-го года отладчик выдаёт ошибку заранее при вводе
 		break;           // отриц. значения, поэтому во 2-м вызове указан массив размером 0, вместо -1
 	case 2:
@@ -197,10 +293,20 @@ int main()
 		DemoTime();
 		break;
 	case 3:
-	{
 		chooseStruct();  // Task 2.2.3.2
 		break;
-	}
+	case 4:
+		someRectangles();
+		someFlights();   // Task 2.2.3.3
+		someMovies();
+		someTimes();
+		break;
+	case 5:                  // Task 2.2.4.1, 2.2.4.2, 2.2.4.3 - использование указателей в структурах
+		WrongPointers(); // Task 2.2.4.4
+		break;
+	case 6:
+
+		break;
 	default:
 		cout << "Invalid number of case.";
 	}
