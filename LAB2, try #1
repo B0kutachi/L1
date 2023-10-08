@@ -304,6 +304,11 @@ void DemoReadAndWriteRectangles()
 		WriteRectangle(rectangles[i]);
 }
 
+void Exchange(Rectangle& rectangle1, Rectangle& rectangle2)
+{
+
+}
+
 
 int main()
 {
