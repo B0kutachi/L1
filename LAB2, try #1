@@ -108,7 +108,7 @@ struct Discipline {
 	int NumberOfHours;
 };
 
-void DemoRectangle()
+void DemoRectangle1()
 {
 	Rectangle rectangle1{ 20, 15, "blue" };
 	Rectangle* ptr1_rect1 = &rectangle1;
@@ -188,7 +188,7 @@ void chooseStruct()
 	cout << "\nChoose what you want to enter: 1: rectangle, 2: flight, 3: movie, 4: time." << endl;
 	cin >> y;
 	if (y == 1) 
-		DemoRectangle();
+		DemoRectangle1();
 	if (y == 2)
 		DemoFlight();
 	if (y == 3)
@@ -306,6 +306,88 @@ void DemoReadAndWriteRectangles()
 
 void Exchange(Rectangle& rectangle1, Rectangle& rectangle2)
 {
+	Rectangle* rect1 = &rectangle1;
+	Rectangle* rect2 = &rectangle2;
+	double len1, len2, width1, width2;
+	string color1, color2;
+	len1 = rect1->Length; len2 = rect2->Length;
+	width1 = rect1->Width; width2 = rect2->Width;
+	color1 = rect1->Color; color2 = rect2->Color;
+	
+	rect1->Length = len2; rect2->Length = len1;
+	rect1->Width = width2; rect2->Width = width1;
+	rect1->Color = color2; rect2->Color = color1;
+
+}
+
+void DemoRectangle2()
+{
+	Rectangle rectangle1{ 15, 20, "green" };
+	Rectangle rectangle2{ 30, 40, "purple" };
+	cout << "\nRectangle 1 before Exchange: ";
+	WriteRectangle(rectangle1);
+	cout << "\nRectangle 2 before Exchange: ";
+	WriteRectangle(rectangle2);
+
+	Exchange(rectangle1, rectangle2);
+
+	cout << "\n\nRectangle 1 after Exchange: ";
+	WriteRectangle(rectangle1);
+	cout << "\nRectangle 2 after Exchange: ";
+	WriteRectangle(rectangle2);
+}
+
+void FindRectangle(Rectangle* rectangles, int count)
+{
+	double max_length = 0, width = 0;
+
+	for (int i = 0; i < count; i++) {
+		if (rectangles[i].Length > max_length) {
+			max_length = rectangles[i].Length;
+			width = rectangles[i].Width;
+		}
+	}
+	cout << "\n\nThe rectangle with maximum length has the size: " << max_length << "x" << width;
+}
+
+void DemoRectangle3()
+{
+	const int size = 3;
+	Rectangle rectangles[size]{{ 15, 30, "no" }, { 90, 40, "no" }, { 30, 95, "no" } };
+
+	for (int i = 0; i < size; i++)
+		WriteRectangle(rectangles[i]);
+
+	FindRectangle(rectangles, size);
+}
+
+void FindMaxRectangle(Rectangle* rectangles, int count)
+{
+	double max_square = 0, length = 0, width = 0;
+
+	for (int i = 0; i < count; i++) {
+		if ((rectangles[i].Length * rectangles[i].Width) > max_square) {
+			max_square = rectangles[i].Length * rectangles[i].Width;
+			length = rectangles[i].Length;
+			width = rectangles[i].Width;
+		}
+	}
+	cout << "\n\nThe rectangle with the maximum square has the size: " << length << "x" << width;
+}
+
+void DemoRectangle4()
+{
+	const int size = 3;
+	Rectangle rectangles[size]{{ 15, 30, "no" }, { 90, 40, "no" }, { 30, 95, "no" } };
+
+	for (int i = 0; i < size; i++)
+		WriteRectangle(rectangles[i]);
+
+	FindMaxRectangle(rectangles, 3);
+}
+
+void DemoDynamicFlight()
+{
 
 }
 
@@ -321,7 +403,7 @@ int main()
 		DemoSort();      // в версии VS 2013-го года отладчик выдаёт ошибку заранее при вводе
 		break;           // отриц. значения, поэтому во 2-м вызове указан массив размером 0, вместо -1
 	case 2:
-		DemoRectangle(); // Task 2.2.2.1: структуры Rectangle, Flight, Movie, Time
+		DemoRectangle1(); // Task 2.2.2.1: структуры Rectangle, Flight, Movie, Time
 		DemoFlight();    // Task 2.2.2.2: структуры Contact, Song, Discipline
 		DemoMovie();     // Task 2.2.3.1 (по заданию - нужно вызвать ф-ии чтобы проверить работоспособность, без вывода)
 		DemoTime();
@@ -342,6 +424,15 @@ int main()
 		DemoReadAndWriteRectangles(); // Task 2.2.5.1 - ф-я WriteRectangle // Task 2.2.5.2 - ф-я ReadRectangle
 		break;                        // Task 2.2.5.3
 	case 7:
+		DemoRectangle2();             // Task 2.2.5.4
+		break;
+	case 8:
+		DemoRectangle3();             // Task 2.2.5.5
+		break;
+	case 9:
+		DemoRectangle4();             // Task 2.2.5.6
+		break;
+	case 10:
 
 		break;
 	default:
