@@ -108,6 +108,112 @@ struct Discipline {
 	int NumberOfHours;
 };
 
+struct Circle
+{
+	double X;
+	double Y;
+	double Radius;
+	string Color;
+};
+
+
+Circle* makeCircle(double x, double y, double radius, string color)
+{
+	Circle* circle = new Circle;
+	circle->X = x;
+	circle->Y = y;
+	circle->Radius = radius;
+	circle->Color = color;
+	return circle;
+}
+
+Circle* copyCircle(Circle* circle)
+{
+	Circle* copiedcircle = new Circle;
+	copiedcircle->X = circle->X;
+	copiedcircle->Y = circle->Y;
+	copiedcircle->Radius = circle->Radius;
+	copiedcircle->Color = circle->Color;
+	return copiedcircle;
+}
+
+Rectangle* makeRentagle(double length, double width, string color)
+{
+	Rectangle* rectangle = new Rectangle;
+	rectangle->Length = length;
+	rectangle->Width = width;
+	rectangle->Color = color;
+	return rectangle;
+}
+
+Rectangle* copyRectangle(Rectangle* rectangle)
+{
+	Rectangle* copiedrectangle = new Rectangle;
+	copiedrectangle->Length = rectangle->Length;
+	copiedrectangle->Width = rectangle->Width;
+	copiedrectangle->Color = rectangle->Color;
+	return copiedrectangle;
+}
+
+Flight* makeFlight(string departurepoint, string destination, int flighttimeinminutes)
+{
+	Flight* flight = new Flight;
+	flight->DeparturePoint = departurepoint;
+	flight->Destination = destination;
+	flight->FlightTimeInMinutes = flighttimeinminutes;
+	return flight;
+}
+
+Flight* copyFlight(Flight* flight)
+{
+	Flight* copiedflight = new Flight;
+	copiedflight->DeparturePoint = flight->DeparturePoint;
+	copiedflight->Destination = flight->Destination;
+	copiedflight->FlightTimeInMinutes = flight->FlightTimeInMinutes;
+	return copiedflight;
+}
+
+Movie* makeMovie(string title, int durationinminutes, int theyearofrelease, string genre, double rating)
+{
+	Movie* movie = new Movie;
+	movie->Title = title;
+	movie->DurationInMinutes = durationinminutes;
+	movie->TheYearOfRelease = theyearofrelease;
+	movie->Genre = genre;
+	movie->Rating = rating;
+	return movie;
+}
+
+Movie* copyMovie(Movie* movie)
+{
+	Movie* copiedmovie = new Movie;
+	copiedmovie->Title = movie->Title;
+	copiedmovie->DurationInMinutes = movie->DurationInMinutes;
+	copiedmovie->TheYearOfRelease = movie->TheYearOfRelease;
+	copiedmovie->Genre = movie->Genre;
+	copiedmovie->Rating = movie->Rating;
+	return copiedmovie;
+}
+
+Time* makeTime(int clocks, int minutes, int seconds)
+{
+	Time* time = new Time;
+	time->clocks = clocks;
+	time->minutes = minutes;
+	time->seconds = seconds;
+	return time;
+}
+
+Time* copyTime(Time* time)
+{
+	Time* copiedtime = new Time;
+	copiedtime->clocks = time->clocks;
+	copiedtime->minutes = time->minutes;
+	copiedtime->seconds = time->seconds;
+	return copiedtime;
+}
+
+
 void DemoRectangle1()
 {
 	Rectangle rectangle1{ 20, 15, "blue" };
@@ -388,6 +494,107 @@ void DemoRectangle4()
 
 void DemoDynamicFlight()
 {
+	Flight* flight = new Flight;
+	
+	flight->DeparturePoint = "Tomsk";
+	flight->Destination = "Moscow";
+	flight->FlightTimeInMinutes = 70;
+
+	cout << "\nThe flight " << flight->DeparturePoint << " - " << flight->Destination
+		<< " is in flight for " << flight->FlightTimeInMinutes << " minutes.";
+
+	delete flight; flight = nullptr;
+}
+
+void FindShortestFlight(Flight* flights, int count)
+{
+	int shortestflight = flights[0].FlightTimeInMinutes;
+	int number = 0;
+
+	for (int i = 1; i < count; i++) {
+		if ((flights[i].FlightTimeInMinutes) < shortestflight) {
+			shortestflight = flights[i].FlightTimeInMinutes;
+			number = i;
+		}
+	}
+
+	cout << "\n\nThe shortest flight is #" << number+1 << ": " << flights[number].DeparturePoint << " - "
+		<< flights[number].Destination << " is in flight for " << shortestflight << " minutes.";
+}
+
+void DemoDynamicFlights()
+{
+	const int size = 4;
+	Flight* flight = new Flight[size];
+	
+	flight[0] = { "Tomsk", "Moscow", 160 };
+	flight[1] = { "Moscow", "Novosibirsk", 180 };
+	flight[2] = { "Omsk", "Tyumen", 90 };
+	flight[3] = { "Omsk", "St. Petersburg ", 120 };
+	
+	for (int i = 0; i < size; i++) {
+		cout << "\nThe flight #" << i+1 << ": " << flight[i].DeparturePoint << " - " << flight[i].Destination
+			<< " is in flight for " << flight[i].FlightTimeInMinutes << " minutes.";
+	}
+
+	FindShortestFlight(flight, size);
+
+	delete[] flight; flight = nullptr;
+}
+
+Circle* MakeCircle(double x, double y, double radius, string color)
+{
+	Circle* circle = new Circle;
+	circle->X = x;
+	circle->Y = y;
+	circle->Radius = radius;
+	circle->Color = color;
+	return circle;
+}
+
+Circle* CopyCircle(Circle* circle)
+{
+	Circle* copiedcircle = new Circle;
+	copiedcircle->X = circle->X;
+	copiedcircle->Y = circle->Y;
+	copiedcircle->Radius = circle->Radius;
+	copiedcircle->Color = circle->Color;
+	return copiedcircle;
+}
+
+void DemoCircle()
+{
+
+	Circle* circle1 = makeCircle(5.0, 7.0, 7.5, "Red");
+	Circle* circle2 = makeCircle(2.0, -12.0, 12.75, "Green");
+	Circle* circle3 = makeCircle(-10.0, 10.0, 1.45, "Blue");
+
+	Circle* copiedCircle1 = copyCircle(circle1);
+	Circle* copiedCircle2 = copyCircle(circle2);
+	Circle* copiedCircle3 = copyCircle(circle3);
+
+}
+
+void MakeStructs()
+{
+	Rectangle* rectangle = makeRentagle(15, 20, "blue");
+	cout << "\nRectangle: " << rectangle->Length << "x" << rectangle->Width << " Color: " << rectangle->Color;
+
+	Flight* flight = makeFlight("Tomsk", "Moscow", 200);
+	cout << "\nFlight: " << flight->DeparturePoint << " - "
+		<< flight->Destination << " Time: " << flight->FlightTimeInMinutes;
+
+	Movie* movie = makeMovie("King Arthur's sword", 126, 2017, "action", 10);
+	cout << "\nMovie: " << movie->Title << " Duration: " << movie->DurationInMinutes << " Release: " <<
+		movie->TheYearOfRelease << " Genre: " << movie->Genre << " Rating: " << movie->Rating;
+
+	Time* time = makeTime(18, 30, 47);
+	cout << "\nTime is: " << time->clocks << ":" << time->minutes << ":" << time->seconds;
+
+}
+
+void CopyStructs()
+{
 
 }
 
@@ -433,7 +640,22 @@ int main()
 		DemoRectangle4();             // Task 2.2.5.6
 		break;
 	case 10:
-
+		DemoDynamicFlight();          // Task 2.2.6.1
+		break;
+	case 11:
+		DemoDynamicFlights();         // Task 2.2.6.2
+		break;
+	case 12:
+		DemoDynamicFlights();         // Task 2.2.6.3
+		break;
+	case 13:
+		DemoCircle();                 // Task 2.2.7.1
+		break;
+	case 14:
+		MakeStructs();                // Task 2.2.7.2
+		break;
+	case 15:
+		CopyStructs();                // Task 2.2.7.3
 		break;
 	default:
 		cout << "Invalid number of case.";
