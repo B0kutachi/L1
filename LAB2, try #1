@@ -595,7 +595,177 @@ void MakeStructs()
 
 void CopyStructs()
 {
+	Rectangle* rectangle = makeRentagle(15, 20, "blue");
+	Rectangle* rectangle2;
+	rectangle2 = copyRectangle(rectangle);
+	cout << "\nCopied rectangle: " << rectangle2->Length << "x" << rectangle2->Width << " Color: " << rectangle2->Color;
 
+	Flight* flight = makeFlight("Tomsk", "Moscow", 200);
+	Flight* flight2;
+	flight2 = copyFlight(flight);
+	cout << "\nCopied flight: " << flight2->DeparturePoint << " - "
+		<< flight2->Destination << " Time: " << flight2->FlightTimeInMinutes;
+
+	Movie* movie = makeMovie("King Arthur's sword", 126, 2017, "action", 10);
+	Movie* movie2;
+	movie2 = copyMovie(movie);
+	cout << "\nCopied movie: " << movie2->Title << " Duration: " << movie2->DurationInMinutes << " Release: " <<
+		movie2->TheYearOfRelease << " Genre: " << movie2->Genre << " Rating: " << movie2->Rating;
+
+	Time* time = makeTime(18, 30, 47);
+	Time* time2;
+	time2 = copyTime(time);
+	cout << "\nCopied time is: " << time2->clocks << ":" << time2->minutes << ":" << time2->seconds;
+}
+
+enum Color {
+	Red = 1,
+	Yellow,
+	Orange,
+	Green,
+	LightBlue,
+	DarkBlue,
+	Purple
+};
+
+enum Day {
+	Monday = 1,
+	Tuesday,
+	Wednesday,
+	Thursday,
+	Friday,
+	Saturday,
+	Sunday
+};
+
+enum Genre {
+	Comedy,
+	Drama,
+	Thriller,
+	Action,
+	Horror,
+	Blockbuster
+};
+
+enum Education {
+	FullTime,
+	PartTime,
+	Evening,
+	DistanceLearning
+};
+
+enum Smartphone {
+	Apple,
+	Samsung,
+	Realme,
+	Xiaomi
+};
+
+enum Season {
+	Spring,
+	Autumn,
+	Summer,
+	Winter
+};
+
+void DemoEnums()
+{
+	Color colors[6] = { Red, Yellow, Orange, Green, LightBlue, DarkBlue, };
+	Day days[6] = { Monday, Tuesday, Wednesday, Thursday, Friday, Saturday };
+	Genre genres[6] = { Comedy, Drama, Thriller, Action, Horror, Blockbuster };
+	Education education[4] = { FullTime, PartTime, Evening, DistanceLearning };
+	Smartphone smartphones[4] = { Apple, Samsung, Realme, Xiaomi };
+	Season seasons[4] = { Spring, Autumn, Summer, Winter };
+}
+
+void WriteColor(Color color)
+{
+	int x = color;
+	switch (x)
+	{
+	case Red:
+		cout << "\nRed color" << endl;
+		break;
+	case Yellow:
+		cout << "\nYellow color" << endl;
+		break;
+	case Orange:
+		cout << "\nOrange color" << endl;
+		break;
+	case Green:
+		cout << "\nGreen color" << endl;
+		break;
+	case LightBlue:
+		cout << "\nLight Blue color" << endl;
+		break;
+	case DarkBlue:
+		cout << "\nDark Blue color" << endl;
+		break;
+	case Purple:
+		cout << "\nPurple color" << endl;
+		break;
+	}
+}
+
+Color ReadColor() {
+	int color;
+	cout << "\nEnter number 1-7 (1 - red, 2 - yellow, 3 - orange, 4 - green, 5 - light blue, 6 - dark blue, 7 - purple)";
+	cin >> color;
+	switch (color)
+	{
+	case 1:
+		return Red;
+		break;
+	case 2:
+		return Yellow;
+		break;
+	case 3:
+		return Orange;
+		break;
+	case 4:
+		return Green;
+		break;
+	case 5:
+		return LightBlue;
+		break;
+	case 6:
+		return DarkBlue;
+		break;
+	case 7:
+		return Purple;
+		break;
+	default:
+		cout << "Invalid color. Returned red color.";
+		return Red;
+	}
+}
+
+int CountRed(Color* colors, int count)
+{
+	int valueofred = 0;
+	for (int i = 0; i < count; i++) {
+		if (colors[i] == Red) {
+			valueofred += 1;
+		}
+	}
+	return valueofred;
+}
+
+int CountColor(Color* colors, int count, Color findedColor)
+{
+	int valuefind = 0;
+	for (int i = 0; i < count; i++) {
+		if (colors[i] == findedColor) {
+			valuefind += 1;
+		}
+	}
+	return valuefind;
+}
+
+void demoCountColor()
+{
+	Color colors[8] {Red, Green, Purple, Orange, Green, Green, DarkBlue, Green};
+	cout << CountColor(colors, 8, Green);
 }
 
 
@@ -611,51 +781,57 @@ int main()
 		break;           // отриц. значения, поэтому во 2-м вызове указан массив размером 0, вместо -1
 	case 2:
 		DemoRectangle1(); // Task 2.2.2.1: структуры Rectangle, Flight, Movie, Time
-		DemoFlight();    // Task 2.2.2.2: структуры Contact, Song, Discipline
-		DemoMovie();     // Task 2.2.3.1 (по заданию - нужно вызвать ф-ии чтобы проверить работоспособность, без вывода)
+		DemoFlight();     // Task 2.2.2.2: структуры Contact, Song, Discipline
+		DemoMovie();      // Task 2.2.3.1 (по заданию - нужно вызвать ф-ии чтобы проверить работоспособность, без вывода)
 		DemoTime();
 		break;
 	case 3:
-		chooseStruct();  // Task 2.2.3.2
+		chooseStruct();   // Task 2.2.3.2
 		break;
 	case 4:
 		someRectangles();
-		someFlights();   // Task 2.2.3.3
+		someFlights();    // Task 2.2.3.3
 		someMovies();
 		someTimes();
 		break;
-	case 5:              // Task 2.2.4.1, 2.2.4.2, 2.2.4.3 - использование указателей в структурах
-		WrongPointers(); // Task 2.2.4.4
+	case 5:               // Task 2.2.4.1, 2.2.4.2, 2.2.4.3 - использование указателей в структурах
+		WrongPointers();  // Task 2.2.4.4
 		break;
 	case 6:
 		DemoReadAndWriteRectangles(); // Task 2.2.5.1 - ф-я WriteRectangle // Task 2.2.5.2 - ф-я ReadRectangle
 		break;                        // Task 2.2.5.3
 	case 7:
-		DemoRectangle2();             // Task 2.2.5.4
+		DemoRectangle2();        // Task 2.2.5.4
 		break;
 	case 8:
-		DemoRectangle3();             // Task 2.2.5.5
+		DemoRectangle3();        // Task 2.2.5.5
 		break;
 	case 9:
-		DemoRectangle4();             // Task 2.2.5.6
+		DemoRectangle4();        // Task 2.2.5.6
 		break;
 	case 10:
-		DemoDynamicFlight();          // Task 2.2.6.1
+		DemoDynamicFlight();     // Task 2.2.6.1
 		break;
 	case 11:
-		DemoDynamicFlights();         // Task 2.2.6.2
+		DemoDynamicFlights();    // Task 2.2.6.2
 		break;
 	case 12:
-		DemoDynamicFlights();         // Task 2.2.6.3
+		DemoDynamicFlights();    // Task 2.2.6.3
 		break;
 	case 13:
-		DemoCircle();                 // Task 2.2.7.1
+		DemoCircle();            // Task 2.2.7.1
 		break;
 	case 14:
-		MakeStructs();                // Task 2.2.7.2
+		MakeStructs();           // Task 2.2.7.2
 		break;
 	case 15:
-		CopyStructs();                // Task 2.2.7.3
+		CopyStructs();           // Task 2.2.7.3
+		break;
+	case 16:
+		demoCountColor();        // Task 2.2.8.8
+		break;
+	case 17:
+
 		break;
 	default:
 		cout << "Invalid number of case.";
