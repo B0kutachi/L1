@@ -62,6 +62,7 @@ void DemoSort()
 	{
 		cout << "Exception catched! " << "Invalid count." << endl;
 	}
+
 }
 
 struct Rectangle {
@@ -156,7 +157,7 @@ Circle* copyCircle(Circle* circle)
 	return copiedcircle;
 }
 
-Rectangle* makeRentagle(double length, double width, string color)
+Rectangle* makeRectangle(double length, double width, string color)
 {
 	Rectangle* rectangle = new Rectangle;
 	rectangle->Length = length;
@@ -619,26 +620,6 @@ void DemoDynamicFlights()
 	delete[] flight; flight = nullptr;
 }
 
-Circle* MakeCircle(double x, double y, double radius, string color)
-{
-	Circle* circle = new Circle;
-	circle->X = x;
-	circle->Y = y;
-	circle->Radius = radius;
-	circle->Color = color;
-	return circle;
-}
-
-Circle* CopyCircle(Circle* circle)
-{
-	Circle* copiedcircle = new Circle;
-	copiedcircle->X = circle->X;
-	copiedcircle->Y = circle->Y;
-	copiedcircle->Radius = circle->Radius;
-	copiedcircle->Color = circle->Color;
-	return copiedcircle;
-}
-
 void DemoCircle()
 {
 
@@ -651,11 +632,19 @@ void DemoCircle()
 	Circle* copiedCircle3 = copyCircle(circle3);
 
 	cout << "\nSuccessfully copied.";
+
+	delete circle1; circle1 = nullptr;
+	delete circle2; circle2 = nullptr;
+	delete circle3; circle3 = nullptr;
+
+	delete copiedCircle1; copiedCircle1 = nullptr;
+	delete copiedCircle2; copiedCircle2 = nullptr;
+	delete copiedCircle3; copiedCircle3 = nullptr;
 }
 
 void MakeStructs()
 {
-	Rectangle* rectangle = makeRentagle(15, 20, "blue");
+	Rectangle* rectangle = makeRectangle(15, 20, "blue");
 	cout << "\nRectangle: " << rectangle->Length << "x" << rectangle->Width << " Color: " << rectangle->Color;
 
 	Flight* flight = makeFlight("Tomsk", "Moscow", 200);
@@ -697,11 +686,14 @@ void MakeStructs()
 	Time* time = makeTime(18, 30, 47);
 	cout << "\nTime is: " << time->clocks << ":" << time->minutes << ":" << time->seconds;
 
+	delete rectangle; rectangle = nullptr;
+	delete flight; flight = nullptr;
+	delete time; time = nullptr;
 }
 
 void CopyStructs()
 {
-	Rectangle* rectangle = makeRentagle(15, 20, "blue");
+	Rectangle* rectangle = makeRectangle(15, 20, "blue");
 	Rectangle* rectangle2;
 	rectangle2 = copyRectangle(rectangle);
 	cout << "\nCopied rectangle: " << rectangle2->Length << "x" << rectangle2->Width << " Color: " << rectangle2->Color;
@@ -750,6 +742,15 @@ void CopyStructs()
 	Time* time2;
 	time2 = copyTime(time);
 	cout << "\nCopied time is: " << time2->clocks << ":" << time2->minutes << ":" << time2->seconds;
+
+	delete rectangle; rectangle = nullptr;
+	delete rectangle2; rectangle2 = nullptr;
+	delete flight; flight = nullptr;
+	delete flight2; flight2 = nullptr;
+	delete movie; movie = nullptr;
+	delete movie2; movie2 = nullptr;
+	delete time; time = nullptr;
+	delete time2; time2 = nullptr;
 }
 
 enum Color {
@@ -923,11 +924,24 @@ void demoCountColor()
 	CountColor(colors, 8, Green);
 }
 
-void DemoMovieWithGenre()
+int CountMoviesByGenre(Movie* movies, int count, Genre findGenre)
 {
 
 }
 
+void DemoMovieWithGenre()
+{
+	Movie movie00{ "Kings", 25, 2014, Movie::Action, 9.8 };
+	Movie* movie000 = makeMovie("\nKing Arthur's sword", 126, 2017, Movie::Adventure, 9.9);
+
+	Movie movies[10];
+		movies[0];
+
+		CountMoviesByGenre(movies, 10, Adventure);
+
+
+	delete movie000; movie000 = nullptr;
+}
 
 
 int main()
@@ -992,7 +1006,7 @@ int main()
 		demoCountColor();        // Task 2.2.8.8
 		break;
 	case 17:
-
+		DemoMovieWithGenre();    // Task 2.2.9.4
 		break;
 	default:
 		cout << "Invalid number of case.";
