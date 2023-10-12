@@ -42,7 +42,7 @@ void DemoSort()
 			cout << values[i] << " ";
 		delete[] values; values = nullptr;
 	}
-	catch (const exception& ex)
+	catch (exception)
 	{
 		cout << "\nException catched!";
 	}
@@ -58,7 +58,7 @@ void DemoSort()
 			cout << values[i] << " ";
 		delete[] values; values = nullptr;
 	}
-	catch (const exception& ex)
+	catch (exception)
 	{
 		cout << "Exception catched! " << "Invalid count." << endl;
 	}
@@ -76,11 +76,30 @@ struct Flight {
 	int FlightTimeInMinutes;
 };
 
+enum Genre{
+	Action, 
+	Blockbuster,
+	Comedy,
+	Horror,
+	Thriller,
+	Fantasy,
+	Drama,
+	Adventure
+};
+
 struct Movie {
 	string Title;
 	int DurationInMinutes;
 	int TheYearOfRelease;
-	string Genre;
+	enum Genres {Action = 1,
+		Blockbuster,
+		Comedy,
+		Horror,
+		Thriller,
+		Fantasy,
+		Drama,
+		Adventure};
+	Genres Genre;
 	double Rating;
 };
 
@@ -173,7 +192,7 @@ Flight* copyFlight(Flight* flight)
 	return copiedflight;
 }
 
-Movie* makeMovie(string title, int durationinminutes, int theyearofrelease, string genre, double rating)
+Movie* makeMovie(string title, int durationinminutes, int theyearofrelease, Movie::Genres genre, double rating)
 {
 	Movie* movie = new Movie;
 	movie->Title = title;
@@ -250,7 +269,7 @@ void DemoFlight()
 
 void DemoMovie()
 {
-	Movie movie1{ "King Arthur's sword", 126, 2017, "fantasy, action, drama, adventure", 7.2 };
+	Movie movie1{ "King Arthur's sword", 126, 2017, Movie::Adventure, 7.2 };
 	Movie* ptr1_mv1 = &movie1;
 	Movie* ptr2_mv1 = &movie1;
 	cout << "\nEnter title of movie: ";
@@ -260,14 +279,43 @@ void DemoMovie()
 	cin >> ptr1_mv1->DurationInMinutes;
 	cout << "Enter release year date: ";
 	cin >> ptr1_mv1->TheYearOfRelease;
-	cout << "Enter genres of movie: ";
-	cin.ignore(32767, '\n');
-	getline(cin, ptr1_mv1->Genre);
+	cout << "Enter genre of movie (1-8 for Action, Blockbuster, Comedy, Horror, Thriller, Fantasy, Drama, Adventure): ";
+	int genre;
+	cin >> genre;
+	ptr1_mv1->Genre = static_cast<Movie::Genres>(genre);
 	cout << "Enter rating of movie: ";
 	cin >> ptr1_mv1->Rating;
-	cout << "\nMovie: " << ptr1_mv1->Title << endl << "Duration: " << ptr1_mv1->DurationInMinutes << endl 
-		<< "Release year date: " << ptr1_mv1->TheYearOfRelease << endl << "Genres: " <<
-			ptr1_mv1->Genre << endl << "Rating: " << ptr1_mv1->Rating << endl;
+	cout << "\nMovie: " << ptr1_mv1->Title << "\nDuration: " << ptr1_mv1->DurationInMinutes <<
+		"\nRelease year date: " << ptr1_mv1->TheYearOfRelease << "\nGenres: ";
+	switch (ptr1_mv1->Genre)
+	{
+	case 1:
+		cout << "Action ";
+		break;
+	case 2:
+		cout << "Blockbuster ";
+		break;
+	case 3:
+		cout << "Comedy ";
+		break;
+	case 4:
+		cout << "Horror ";
+		break;
+	case 5:
+		cout << "Thriller ";
+		break;
+	case 6:
+		cout << "Fantasy ";
+		break;
+	case 7:
+		cout << "Drama ";
+		break;
+	case 8:
+		cout << "Adventure ";
+		break;
+	}
+	cout << "\nRating: " << ptr1_mv1->Rating << endl;
+
 	cout << "\nAddress of ptr1: " << ptr1_mv1;
 	cout << "\nAddress of ptr2: " << ptr2_mv1 << endl;
 }
@@ -317,11 +365,39 @@ void showFlights(struct Flight nameFlight, int number)
 		<< nameFlight.FlightTimeInMinutes << " minutes." << endl;
 }
 
-void showMovies(struct Movie nameMovie, int number)
+void showMovies(Movie& namemovie, int number)
 {
-	cout << "Movie #" << number << ": " << nameMovie.Title << " Duration: " << nameMovie.DurationInMinutes
-		<< ". Release year date: " << nameMovie.TheYearOfRelease << ". Genres: " <<
-		nameMovie.Genre << ". Rating: " << nameMovie.Rating << endl;
+	Movie* nameMovie = &namemovie;
+	cout << "Movie #" << number << ": " << namemovie.Title << " Duration: " << namemovie.DurationInMinutes
+		<< ". Release year date: " << namemovie.TheYearOfRelease << ". Genre: ";
+	switch (namemovie.Genre)
+	{
+	case 1:
+		cout << "Action ";
+		break;
+	case 2:
+		cout << "Blockbuster ";
+		break;
+	case 3:
+		cout << "Comedy ";
+		break;
+	case 4:
+		cout << "Horror ";
+		break;
+	case 5:
+		cout << "Thriller ";
+		break;
+	case 6:
+		cout << "Fantasy ";
+		break;
+	case 7:
+		cout << "Drama ";
+		break;
+	case 8:
+		cout << "Adventure ";
+		break;
+	}
+	cout << ". Rating: " << namemovie.Rating << endl;
 }
 
 void showTimes(struct Time time, int number)
@@ -354,12 +430,12 @@ void someFlights()
 
 void someMovies()
 {
-	Movie movie1{ "King Arthur's sword.", 126, 2017, "fantasy, action, drama, adventure", 7.2 };
+	Movie movie1{ "King Arthur's sword.", 126, 2017, Movie::Adventure, 7.2 };
 	cout << endl;
 	showMovies(movie1, 1);
-	Movie movie2{ "Two, three, demon, come!", 95, 2022, "horrors", 6.6 };
+	Movie movie2{ "Two, three, demon, come!", 95, 2022, Movie::Horror, 6.6 };
 	showMovies(movie2, 2);
-	Movie movie3{ "Harry Potter and the Prisoner of Azkaban.", 142, 2004, "fantasy, adventure", 8.2};
+	Movie movie3{ "Harry Potter and the Prisoner of Azkaban.", 142, 2004, Movie::Fantasy, 8.2};
 	showMovies(movie3, 3);
 }
 
@@ -377,9 +453,10 @@ void someTimes()
 void WrongPointers()
 {
 	Flight flight{ "Nsk", "Tomsk", 12 };
-	Movie movie{ "King Arthur's sword.", 126, 2017, "fantasy, action, drama, adventure", 7.2 };
+	Movie movie{ "King Arthur's sword.", 126, 2017, Movie::Adventure, 7.2 };
 	Flight* ptr1_fl = &flight;
 	Movie* ptr1_mv = &movie;
+	cout << "\nSuccessfully launched.";
 }
 
 void WriteRectangle(Rectangle& rectangle)
@@ -573,6 +650,7 @@ void DemoCircle()
 	Circle* copiedCircle2 = copyCircle(circle2);
 	Circle* copiedCircle3 = copyCircle(circle3);
 
+	cout << "\nSuccessfully copied.";
 }
 
 void MakeStructs()
@@ -584,9 +662,37 @@ void MakeStructs()
 	cout << "\nFlight: " << flight->DeparturePoint << " - "
 		<< flight->Destination << " Time: " << flight->FlightTimeInMinutes;
 
-	Movie* movie = makeMovie("King Arthur's sword", 126, 2017, "action", 10);
+	Movie* movie = makeMovie("King Arthur's sword", 126, 2017, Movie::Action, 10);
 	cout << "\nMovie: " << movie->Title << " Duration: " << movie->DurationInMinutes << " Release: " <<
-		movie->TheYearOfRelease << " Genre: " << movie->Genre << " Rating: " << movie->Rating;
+		movie->TheYearOfRelease << " Genre: ";
+	switch (movie->Genre)
+	{
+	case 1:
+		cout << "Action ";
+		break;
+	case 2:
+		cout << "Blockbuster ";
+		break;
+	case 3:
+		cout << "Comedy ";
+		break;
+	case 4:
+		cout << "Horror ";
+		break;
+	case 5:
+		cout << "Thriller ";
+		break;
+	case 6:
+		cout << "Fantasy ";
+		break;
+	case 7:
+		cout << "Drama ";
+		break;
+	case 8:
+		cout << "Adventure ";
+		break;
+	}
+		cout << "Rating: " << movie->Rating;
 
 	Time* time = makeTime(18, 30, 47);
 	cout << "\nTime is: " << time->clocks << ":" << time->minutes << ":" << time->seconds;
@@ -606,11 +712,39 @@ void CopyStructs()
 	cout << "\nCopied flight: " << flight2->DeparturePoint << " - "
 		<< flight2->Destination << " Time: " << flight2->FlightTimeInMinutes;
 
-	Movie* movie = makeMovie("King Arthur's sword", 126, 2017, "action", 10);
+	Movie* movie = makeMovie("King Arthur's sword", 126, 2017, Movie::Action, 10);
 	Movie* movie2;
 	movie2 = copyMovie(movie);
 	cout << "\nCopied movie: " << movie2->Title << " Duration: " << movie2->DurationInMinutes << " Release: " <<
-		movie2->TheYearOfRelease << " Genre: " << movie2->Genre << " Rating: " << movie2->Rating;
+		movie2->TheYearOfRelease << " Genre: ";
+	switch (movie2->Genre)
+	{
+	case 1:
+		cout << "Action ";
+		break;
+	case 2:
+		cout << "Blockbuster ";
+		break;
+	case 3:
+		cout << "Comedy ";
+		break;
+	case 4:
+		cout << "Horror ";
+		break;
+	case 5:
+		cout << "Thriller ";
+		break;
+	case 6:
+		cout << "Fantasy ";
+		break;
+	case 7:
+		cout << "Drama ";
+		break;
+	case 8:
+		cout << "Adventure ";
+		break;
+	}
+		cout << "Rating: " << movie2->Rating;
 
 	Time* time = makeTime(18, 30, 47);
 	Time* time2;
@@ -638,15 +772,6 @@ enum Day {
 	Sunday
 };
 
-enum Genre {
-	Comedy,
-	Drama,
-	Thriller,
-	Action,
-	Horror,
-	Blockbuster
-};
-
 enum Education {
 	FullTime,
 	PartTime,
@@ -672,7 +797,7 @@ void DemoEnums()
 {
 	Color colors[6] = { Red, Yellow, Orange, Green, LightBlue, DarkBlue, };
 	Day days[6] = { Monday, Tuesday, Wednesday, Thursday, Friday, Saturday };
-	Genre genres[6] = { Comedy, Drama, Thriller, Action, Horror, Blockbuster };
+	Genre genre[6] = { Comedy, Drama, Thriller, Action, Horror, Blockbuster };
 	Education education[4] = { FullTime, PartTime, Evening, DistanceLearning };
 	Smartphone smartphones[4] = { Apple, Samsung, Realme, Xiaomi };
 	Season seasons[4] = { Spring, Autumn, Summer, Winter };
@@ -754,19 +879,55 @@ int CountRed(Color* colors, int count)
 int CountColor(Color* colors, int count, Color findedColor)
 {
 	int valuefind = 0;
-	for (int i = 0; i < count; i++) {
+	for (int i = 0; i < count; ++i) {
 		if (colors[i] == findedColor) {
 			valuefind += 1;
 		}
 	}
+	cout << valuefind << " ";
+	switch (findedColor)
+	{
+	case 1:
+		cout << "Red";
+		break;
+	case 2:
+		cout << "Yellow";
+		break;
+	case 3:
+		cout << "Orange";
+		break;
+	case 4:
+		cout << "Green";
+		break;
+	case 5:
+		cout << "LightBlue";
+		break;
+	case 6:
+		cout << "DarkBlue";
+		break;
+	case 7:
+		cout << "Purple";
+		break;
+	default:
+		cout << "Invalid color. Returned red color.";
+		return Red;
+	}
+	cout << " colors found";
 	return valuefind;
 }
 
 void demoCountColor()
 {
+	
 	Color colors[8] {Red, Green, Purple, Orange, Green, Green, DarkBlue, Green};
-	cout << CountColor(colors, 8, Green);
+	CountColor(colors, 8, Green);
 }
+
+void DemoMovieWithGenre()
+{
+
+}
+
 
 
 int main()
