@@ -78,7 +78,7 @@ struct Flight {
 };
 
 enum Genre{
-	Action, 
+	Action = 1, 
 	Blockbuster,
 	Comedy,
 	Horror,
@@ -350,7 +350,7 @@ void chooseStruct()
 		DemoMovie();
 	if (y == 4)
 		DemoTime();
-	if (y > 4 | y < 1)
+	if (y > 4 || y < 1)
 		cout << "Invalid number." << endl;
 }
 
@@ -924,9 +924,20 @@ void demoCountColor()
 	CountColor(colors, 8, Green);
 }
 
-int CountMoviesByGenre(Movie* movies, int count, Genre findGenre)
+int CountMoviesByGenre(Movie* movies, int count, int findGenre)
 {
+	int findcount = 0;
+	double maxrating = 0.0;
+	for (int i = 0; i < count; i++) {
+		if (movies[i].Genre == findGenre) {
+			findcount++;
+			if (movies[i].Rating > maxrating) {
+				maxrating = movies[i].Rating;
+			}
+		}
+	}
 
+	return findcount;
 }
 
 void DemoMovieWithGenre()
@@ -934,13 +945,98 @@ void DemoMovieWithGenre()
 	Movie movie00{ "Kings", 25, 2014, Movie::Action, 9.8 };
 	Movie* movie000 = makeMovie("\nKing Arthur's sword", 126, 2017, Movie::Adventure, 9.9);
 
-	Movie movies[10];
-		movies[0];
+	Movie* movies = new Movie[10];
+	movies[0] = { "Movie 1", 140, 2020, Movie::Adventure, 7.3 };
+	movies[1] = { "Movie 2", 119, 2018, Movie::Fantasy, 6.1 };
+	movies[2] = { "Movie 3", 136, 2013, Movie::Action, 5.3 };
+	movies[3] = { "Movie 4", 117, 2017, Movie::Adventure, 7.9 };
+	movies[4] = { "Movie 5", 109, 2023, Movie::Drama, 8.8 };
+	movies[5] = { "Movie 6", 123, 2009, Movie::Thriller, 8.9 };
+	movies[6] = { "Movie 7", 128, 2007, Movie::Comedy, 9.2 };
+	movies[7] = { "Movie 8", 116, 2012, Movie::Adventure, 8.6 };
+	movies[8] = { "Movie 9", 133, 2019, Movie::Action, 9.4 };
+	movies[9] = { "Movie 10", 120, 2013, Movie::Adventure, 8.1 };
 
-		CountMoviesByGenre(movies, 10, Adventure);
+	int count = CountMoviesByGenre(movies, 10, Adventure);
+
+	cout << "\nFound " << count << " movies with genre Adventure";
 
 
 	delete movie000; movie000 = nullptr;
+	delete[] movies; movies = nullptr;
+}
+
+Movie* FindBestGenreMovie(Movie* movies, int count, Genre findGenre)
+{
+	Movie* bestmovie = new Movie;
+
+	int countt = 0;
+	double maxrating = 0.0;
+	for (int i = 0; i < count; i++) {
+		if (movies[i].Genre == findGenre) {
+			countt++;
+			if (movies[i].Rating > maxrating) {
+				maxrating = movies[i].Rating;
+				bestmovie->Title = movies[i].Title;
+				bestmovie->DurationInMinutes = movies[i].DurationInMinutes;
+				bestmovie->TheYearOfRelease = movies[i].TheYearOfRelease;
+				bestmovie->Genre = movies[i].Genre;
+				bestmovie->Rating = movies[i].Rating;
+			}
+		}
+
+	}
+	return bestmovie;
+}
+
+void BestGenre()
+{
+	Movie* movies = new Movie[10];
+	movies[0] = { "Movie #1", 140, 2020, Movie::Adventure, 7.3 };
+	movies[1] = { "Movie #2", 119, 2018, Movie::Fantasy, 6.1 };
+	movies[2] = { "Movie #3", 136, 2013, Movie::Action, 5.3 };
+	movies[3] = { "Movie #4", 117, 2017, Movie::Adventure, 7.9 };
+	movies[4] = { "Movie #5", 109, 2023, Movie::Drama, 8.8 };
+	movies[5] = { "Movie #6", 123, 2009, Movie::Thriller, 8.9 };
+	movies[6] = { "Movie #7", 128, 2007, Movie::Comedy, 9.2 };
+	movies[7] = { "Movie #8", 116, 2012, Movie::Adventure, 8.6 };
+	movies[8] = { "Movie #9", 133, 2019, Movie::Action, 9.4 };
+	movies[9] = { "Movie #10", 120, 2013, Movie::Adventure, 8.1 };
+
+	Movie* movie = FindBestGenreMovie(movies, 10, Adventure);
+	cout << movie->Title << " Duration: " << movie->DurationInMinutes << " Release: " <<
+		movie->TheYearOfRelease << " Genre: ";
+	switch (movie->Genre)
+	{
+	case 1:
+		cout << "Action ";
+		break;
+	case 2:
+		cout << "Blockbuster ";
+		break;
+	case 3:
+		cout << "Comedy ";
+		break;
+	case 4:
+		cout << "Horror ";
+		break;
+	case 5:
+		cout << "Thriller ";
+		break;
+	case 6:
+		cout << "Fantasy ";
+		break;
+	case 7:
+		cout << "Drama ";
+		break;
+	case 8:
+		cout << "Adventure ";
+		break;
+	}
+		
+	cout << "Rating: " << movie->Rating;
+
+	delete[] movies; movies = nullptr;
 }
 
 
@@ -1007,6 +1103,9 @@ int main()
 		break;
 	case 17:
 		DemoMovieWithGenre();    // Task 2.2.9.4
+		break;
+	case 18:
+		BestGenre();             // Task 2.2.9.5
 		break;
 	default:
 		cout << "Invalid number of case.";
