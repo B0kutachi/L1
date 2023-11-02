@@ -1,5 +1,0 @@
-﻿C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Microsoft\VC\v170\Microsoft.CppBuild.targets(531,5): warning MSB8028: промежуточный каталог (x64\Debug\) содержит файлы, которые используются совместно с другим проектом (OOP_LAB_3.vcxproj).  Это может привести к ошибкам очистки и перестроения.
-  OOP_LAB_4.cpp
-  Ring.cpp
-  Создание кода...
-  OOP_LAB_3.vcxproj -> C:\Users\Kudesn1k\Desktop\proga\OOP_LAB_4\x64\Debug\OOP_LAB_4.exe
