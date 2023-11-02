@@ -1,0 +1,9 @@
+﻿  Book.cpp
+  Music.cpp
+  OOP_LAB_3.cpp
+  Point_Rectangle.cpp
+C:\Users\Kudesn1k\Desktop\proga\OOP_LAB_3\OOP_LAB_3\Point_Rectangle.cpp(7,12): warning C4244: аргумент: преобразование "time_t" в "unsigned int", возможна потеря данных
+  Route.cpp
+  Time_Flight.cpp
+  Создание кода...
+  OOP_LAB_3.vcxproj -> C:\Users\Kudesn1k\Desktop\proga\OOP_LAB_3\x64\Debug\OOP_LAB_3.exe
