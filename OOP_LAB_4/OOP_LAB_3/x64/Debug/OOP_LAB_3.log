@@ -1,0 +1,20 @@
+﻿C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Microsoft\VC\v170\Microsoft.CppBuild.targets(531,5): warning MSB8028: промежуточный каталог (x64\Debug\) содержит файлы, которые используются совместно с другим проектом (OOP_LAB_3.vcxproj).  Это может привести к ошибкам очистки и перестроения.
+  CollisionManager.cpp
+C:\Users\Kudesn1k\Desktop\proga\OOP_LAB_4\OOP_LAB_3\DoubleValidator.h(51,2): warning C4091: static : пропускается слева от "DoubleValidator", когда ни одна переменная не объявлена
+C:\Users\Kudesn1k\Desktop\proga\OOP_LAB_4\OOP_LAB_3\DoubleValidator.h(20,11): warning C4804: >=: небезопасное использование типа "bool" в операции
+C:\Users\Kudesn1k\Desktop\proga\OOP_LAB_4\OOP_LAB_3\CollisionManager.h(39,2): warning C4091: static : пропускается слева от "CollisionManager", когда ни одна переменная не объявлена
+  GeometricProgram.cpp
+C:\Users\Kudesn1k\Desktop\proga\OOP_LAB_4\OOP_LAB_3\DoubleValidator.h(51,2): warning C4091: static : пропускается слева от "DoubleValidator", когда ни одна переменная не объявлена
+C:\Users\Kudesn1k\Desktop\proga\OOP_LAB_4\OOP_LAB_3\DoubleValidator.h(20,11): warning C4804: >=: небезопасное использование типа "bool" в операции
+C:\Users\Kudesn1k\Desktop\proga\OOP_LAB_4\OOP_LAB_3\CollisionManager.h(39,2): warning C4091: static : пропускается слева от "CollisionManager", когда ни одна переменная не объявлена
+C:\Users\Kudesn1k\Desktop\proga\OOP_LAB_4\OOP_LAB_3\GeometricProgram.h(79,13): warning C4244: аргумент: преобразование "time_t" в "unsigned int", возможна потеря данных
+  OOP_LAB_4.cpp
+C:\Users\Kudesn1k\Desktop\proga\OOP_LAB_4\OOP_LAB_3\DoubleValidator.h(51,2): warning C4091: static : пропускается слева от "DoubleValidator", когда ни одна переменная не объявлена
+C:\Users\Kudesn1k\Desktop\proga\OOP_LAB_4\OOP_LAB_3\DoubleValidator.h(20,11): warning C4804: >=: небезопасное использование типа "bool" в операции
+C:\Users\Kudesn1k\Desktop\proga\OOP_LAB_4\OOP_LAB_3\CollisionManager.h(39,2): warning C4091: static : пропускается слева от "CollisionManager", когда ни одна переменная не объявлена
+C:\Users\Kudesn1k\Desktop\proga\OOP_LAB_4\OOP_LAB_3\GeometricProgram.h(79,13): warning C4244: аргумент: преобразование "time_t" в "unsigned int", возможна потеря данных
+  Ring.cpp
+C:\Users\Kudesn1k\Desktop\proga\OOP_LAB_4\OOP_LAB_3\DoubleValidator.h(51,2): warning C4091: static : пропускается слева от "DoubleValidator", когда ни одна переменная не объявлена
+C:\Users\Kudesn1k\Desktop\proga\OOP_LAB_4\OOP_LAB_3\DoubleValidator.h(20,11): warning C4804: >=: небезопасное использование типа "bool" в операции
+  Создание кода...
+  OOP_LAB_3.vcxproj -> C:\Users\Kudesn1k\Desktop\proga\OOP_LAB_4\x64\Debug\OOP_LAB_4.exe
